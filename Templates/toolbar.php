@@ -1,10 +1,10 @@
 <nav id="toolbar">
     <ul>
         <li>
-        <a href="index.php">Home</a></li>
+        <a href="index">Home</a></li>
         
         <li>
-        <a href="portfolio.php">Portfolio</a>
+        <a href="portfolio">Portfolio</a>
             <ul>
                 <li>
                     <a href="#">Transaction History</a>

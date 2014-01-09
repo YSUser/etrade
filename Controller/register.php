@@ -11,12 +11,12 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) //Check for both u
 	if ($register == true)
 	{
 	$_SESSION['register']=$register;
-	header("location:http://192.168.1.120/etrade/root/portfolio.php");
+	header("location:http://192.168.1.120/etrade/root/portfolio");
 	}
 	else
 	{
 			$_SESSION['register']=$register;
-			header("location:http://192.168.1.120/etrade/root/portfolio.php");
+			header("location:http://192.168.1.120/etrade/root/portfolio");
 	}
 
 }
@@ -24,6 +24,6 @@ else
 {
 	$register='Please provide username and password';
 	$_SESSION['register']=$register;
-	header("location:http://192.168.1.120/etrade/root/portfolio.php");
+	header("location:http://192.168.1.120/etrade/root/portfolio");
 }
 ?>

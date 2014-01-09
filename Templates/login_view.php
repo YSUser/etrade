@@ -13,7 +13,7 @@ if (isset($_SESSION['login']))
 	}
 	
 	echo'<p>Or</p>';
-	echo'<a href="../root/portfolio.php">Create an account</a>';
+	echo'<a href="../root/portfolio">Create an account</a>';
 
 ?>
 </div>

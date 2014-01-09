@@ -11,13 +11,13 @@ if (isset($_POST['submit'])) //Sell or Buy Stock
 	{
 		$transaction=buy_shares("$transactionSymbol","$transactionAmount");
 		$_SESSION['transaction']=$transaction;
-		header("location:http://192.168.1.120/etrade/root/portfolio.php");
+		header("location:http://192.168.1.120/etrade/root/portfolio");
 	}
 	if ($_POST['submit'] == 'Sell')
 	{
 		$transaction=sell_shares("$transactionSymbol","$transactionAmount");
 		$_SESSION['transaction']=$transaction;
-		header("location:http://192.168.1.120/etrade/root/portfolio.php");
+		header("location:http://192.168.1.120/etrade/root/portfolio");
 	}
 	
 }//end Sell or Buy Stock

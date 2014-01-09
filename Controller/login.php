@@ -10,14 +10,14 @@ $password = htmlspecialchars($_POST['password']);
 
 $login=login_user($username,$password);
 $_SESSION['login']=$login;
-header("location:http://192.168.1.120/etrade/root/portfolio.php");
+header("location:http://192.168.1.120/etrade/root/portfolio");
 
 }
 else
 {
 	$login='Please provide username and password';
 	$_SESSION['login']=$login;
-	header("location:http://192.168.1.120/etrade/root/portfolio.php");
+	header("location:http://192.168.1.120/etrade/root/portfolio");
 }
 
 ?>

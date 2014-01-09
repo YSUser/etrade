@@ -8,6 +8,6 @@
 </head>
 <body>
 <div id="wrapper">
-<h1><a href="../root/index.php">E-trade</a></h1>
+<h1><a href="../root/index">E-trade</a></h1>
 <?php if (isset($_SESSION['userid'])) render('toolbar'); ?>
 <div id="background">

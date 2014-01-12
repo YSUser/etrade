@@ -4,7 +4,7 @@ require("../controller/functions.php");
 require("../controller/yahoo_connect.php");
 
 
-if (isset($_SESSION['auth']) && ($_SESSION['auth']) == true)
+if (isset($_SESSION['userid']))
 	{	
 		render('header',array('title' => 'E-trade Portfolio'));
 		render('search_view');

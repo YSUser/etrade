@@ -51,11 +51,11 @@ function db_connect()
 				}
 			catch (PDOException $e)
 				{
-				echo'PDO component failed:<br>'. $e->getMessage();
+				return false; //'PDO component failed:<br>'. $e->getMessage();
 				}
 			catch (Exception $e)
 				{
-				echo'Unknown component failed:'. $e->getMessage();
+				return false; //'Unknown component failed:<br>'. $e->getMessage();
 				}
 		return $dbh;
 }
@@ -63,8 +63,8 @@ function db_connect()
 //login user
 function login_user($username,$password)
 	{
-		$dbh=db_connect();
-		
+		if ($dbh=db_connect())
+		{
 		//get salt
 		$sth=$dbh->prepare("SELECT salt FROM users WHERE username=:username");
 		$sth->bindValue(':username',$username,PDO::PARAM_STR);
@@ -82,17 +82,21 @@ function login_user($username,$password)
 			{
 				$_SESSION['userid'] = (int)$sth->fetchColumn(0);
 				$_SESSION['username'] = $username;
-				$_SESSION['auth'] = true;
+				//$_SESSION['auth'] = true; older version
 				$dbh = NULL;
 				return;
 			}
 			else
 			{	
-				$_SESSION['auth'] = false;
+				//$_SESSION['auth'] = false; older version
 				$dbh = NULL;
 				$e='Invalid Username or Password';
 				return $e;
 			}
+		//dbh fail
+		} else {
+			return false;
+		}
 	}//end of login_user function
 
 
@@ -138,7 +142,8 @@ function register_user($username,$password)
 	//validate user input
 	if (alphanumeric_validate($username) == true && alphanumeric_validate($password) == true)
 	{
-	$dbh=db_connect();
+	if ($dbh=db_connect())
+	{
 	
 	//hash password
 	$securePassword = password_hash($password);
@@ -167,7 +172,7 @@ function register_user($username,$password)
 				$id=$sth->fetch(PDO::FETCH_ASSOC);
 				$_SESSION['userid']=$id['id'];
 				$_SESSION['username']=$username;
-				$_SESSION['auth'] = true;
+				//$_SESSION['auth'] = true; older version
 				
 				$dbh=NULL;
 				return true;
@@ -179,8 +184,13 @@ function register_user($username,$password)
 		return 'PDO EXCEPTION<br>'.$e;
 	}
 	
+	//dbh fail
+	} else {
+		return false;
+	}
 	
-	}	//end alpha numeric validatetion
+	//end alpha numeric validatetion
+	}
 	else
 	{
 		$e='Invalid length or characters';

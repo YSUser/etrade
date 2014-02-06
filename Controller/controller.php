@@ -2,12 +2,11 @@
 class Controller
 {
 	public $property = 	1;
-	public $fg;
+	public $root;
 	
 	public function __construct()
 	{
-		session_start();
-		$this->fg = dirname($_SERVER['PHP_SELF']);
+		$this->root = dirname($_SERVER['PHP_SELF']);
 	}
 	
 	public function render($template, $data = array()) //$template= footer/header.
@@ -17,6 +16,11 @@ class Controller
 			extract($data);
 			require("$path");
 							}
+	}
+	
+	public function goHome()
+	{
+		header('Location:' . $this->root);
 	}
 
 }

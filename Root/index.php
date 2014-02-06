@@ -19,6 +19,4 @@ else
 		$etrade->render('search_view');
 		$etrade->render('footer');
 	}
-	echo $etrade->fg; echo '<br>';
-	echo $_SERVER['PHP_SELF'];
 ?>

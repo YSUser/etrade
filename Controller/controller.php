@@ -2,10 +2,12 @@
 class Controller
 {
 	public $property = 	1;
+	public $fg;
 	
 	public function __construct()
 	{
-		session_start();	
+		session_start();
+		$this->fg = dirname($_SERVER['PHP_SELF']);
 	}
 	
 	public function render($template, $data = array()) //$template= footer/header.

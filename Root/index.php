@@ -1,20 +1,22 @@
 <?php
-session_start();
-require("../controller/functions.php");
-require("../controller/yahoo_connect.php");
+$path = '../../etrade_secure/config.php';
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
+require("../bootstrap.php");
+
+$etrade = new controller();
 
 if (isset($_SESSION['userid']))
 	{	
-		render('header',array('title' => 'E-trade Portfolio'));
-		render('search_view');
-		render('footer');
+		$etrade->render('header',array('title' => 'E-trade Portfolio'));
+		$etrade->render('search_view');
+		$etrade->render('footer');
 	}
 else
 	{
-		render('header',array('title' => 'E-trade'));
-		render('login_view');
-		render('search_view');
-		render('footer');
+		$etrade->render('header',array('title' => 'E-trade'));
+		$etrade->render('login_view');
+		$etrade->render('search_view');
+		$etrade->render('footer');
 	}
 ?>

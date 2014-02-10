@@ -1,55 +1,54 @@
 <?php
-require_once("../../etrade_secure/config.php");
-require_once("../controller/yahoo_connect.php");
+//add yahoo connect to model class
 
 class Model
-{
-	const DB_HOST = '192.168.1.120';
-	const DB_NAME = 'e_trade';
-	
-	private $dbh;
+{	
+	public $dbh;
+
+
 
 public funcntion __construct()
-{
-	$this->dbh = dbConnect();
-}
+	{
+		$this->dbh = dbConnect();
+	}
+
 //Hashing password PHP version < 5.3.7
-function random_salt()
-{
-	$size = 16;
-	$salt = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM );
-	return $salt;
-}
+private function randomSalt()
+	{
+		$size = 16;
+		$salt = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM );
+		return $salt;
+	}
 
-function password_hash($password)
-{
-	$salt = random_salt();
-	$hash[0] = crypt($password,$salt);
+private function passwordHash($password)
+	{
+		$salt = random_salt();
+		$hash[0] = crypt($password,$salt);
+		
+			while ($hash[0] == '*0')
+			{
+				$hash = password_hash($password);
+			}
 	
-		while ($hash[0] == '*0')
+		$hash[1] = $salt;
+		return $hash;
+	}
+
+protected function alphanumeric_validate($input)
+	{	
+		if (preg_match('/^[0-9A-Za-z_-]{5,}$/', $input))
 		{
-			$hash = password_hash($password);
+			return true;
 		}
-
-	$hash[1] = $salt;
-	return $hash;
-}
-
-function alphanumeric_validate($input)
-{	
-	if (preg_match('/^[0-9A-Za-z_-]{5,}$/', $input))
-	{
-		return true;
+		else
+		{
+			return false;
+		}
+		
 	}
-	else
-	{
-		return false;
-	}
-	
-}
 
 //connect to db
-function db_connect()
+private function dbConnect()
 {
 		$dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
 
@@ -69,7 +68,7 @@ function db_connect()
 }
 
 //login user
-function login($username,$password)
+public function login($username,$password)
 	{
 		if ($dbh=db_connect())
 		{

@@ -1,4 +1,6 @@
 <?php
+$path = 'Config/Config.php';
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 function autoloader($class)
 {

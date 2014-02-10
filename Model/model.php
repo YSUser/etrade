@@ -2,9 +2,17 @@
 require_once("../../etrade_secure/config.php");
 require_once("../controller/yahoo_connect.php");
 
-define ('DB_HOST','192.168.1.120');
-define ('DB_NAME','e_trade');
+class Model
+{
+	const DB_HOST = '192.168.1.120';
+	const DB_NAME = 'e_trade';
+	
+	private $dbh;
 
+public funcntion __construct()
+{
+	$this->dbh = dbConnect();
+}
 //Hashing password PHP version < 5.3.7
 function random_salt()
 {
@@ -61,7 +69,7 @@ function db_connect()
 }
 
 //login user
-function login_user($username,$password)
+function login($username,$password)
 	{
 		if ($dbh=db_connect())
 		{
@@ -384,7 +392,7 @@ function sell_shares($symbol,$amount)
 	
 }//end of sell shares
 
-function delete_account($username)
+function deleteAccount($username)
 {
 	$dbh=db_connect();
 	$sth=$dbh->query("DELETE FROM e_trade.users WHERE id='$username'");
@@ -396,5 +404,7 @@ function delete_account($username)
 		{
 			return false;	
 		}
+}
+
 }
 ?>

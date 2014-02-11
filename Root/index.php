@@ -1,15 +1,7 @@
 <?php
 require_once("../bootstrap.php");
 
-$etrade = new controller();
+$page = new Dispatcher(new Request);
 
-if (isset($_SESSION['userid']))
-	{	
-		$etrade->renderLayout('profile');
-	}
-else
-	{
-		$etrade->renderLayout('default');
-	}
 	
 ?>

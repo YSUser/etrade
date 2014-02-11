@@ -1,23 +1,12 @@
 <?php
-$path = 'Config/Config.php';
+define ('ROOT' , dirname(__FILE__));
+$path = ROOT . '/Config';
+
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
-function autoloader($class)
-{
-	$file =  ucfirst($class) . '.php';
-	$directory = ucfirst($class) . '/';
-	$path = __DIR__.'/'. $directory . $file;
-	if (file_exists($path))
-		{
-			include $path;
-		}
-	else
-		{
-			//throw exception.. 	
-		}
-}
+include('Dispatch.php');
+include('Request.php');
 
-spl_autoload_register('autoloader');
-
+spl_autoload_register(array('Dispatcher', 'test'));
 
 ?>

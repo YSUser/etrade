@@ -1,5 +1,5 @@
 <?php
-require('../model/model.php');
+require('../Model/model.php');
 
 	echo'<div id="portfolio_view">';
 	echo '<p>Welcome, '.$user.'<br>Current account balance is $'.$_SESSION['userbalance']=get_balance($_SESSION['userid']).'</p>';

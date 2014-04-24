@@ -7,18 +7,18 @@ class Database
 	private $DB_USER = 'root';
 	private $DB_PASS = 'mypass';
 	
-    private static $factory;
-    public static function getFactory()
+    private static $connect;
+    public static function getConnection()
     {
-        if (!self::$factory)
-            self::$factory = new Database();
-        return self::$factory;
+        if (!self::$connect)
+            self::$connect = new Database();
+        return self::$connect;
     }
 
     private $dbh;
 	private $errorHandler;
 
-    public function getConnection() {
+    public function connect() {
         if (!$this->dbh)
           $dsn = $this -> DB_TYPE . ':host=' . $this -> DB_HOST . ';dbname=' . $this -> DB_NAME;
 			try

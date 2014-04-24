@@ -5,7 +5,7 @@ class Model
 	
 	public function __construct()
 	{
-		$this -> db = Database::getFactory() -> getConnection();
+		$this -> db = Database::getConnection() -> connect();
 	}
 }
 ?>

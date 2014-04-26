@@ -1,8 +1,11 @@
 <?php
 class Controller
 {
-	protected $model;
-		
+	public function __set($key, $value)
+	{
+		$this -> $key = $value;
+	}		
+	
 	public function view($name)
 	{
 		$file = 'views/' . $name . '.php';
@@ -23,7 +26,7 @@ class Controller
 		if (file_exists($file))
 		{
 			require $file;
-			$this -> model = new $name();
+			$this -> $name = new $name();
 			
 		}
 		else
@@ -31,7 +34,21 @@ class Controller
 				$controller = new error('Undefined Model');
 				die();
 			}
+	}
 	
+	public function lib($name)
+	{
+		$file = 'libs/' . $name . '.php';
+		if (file_exists($file))
+		{
+			require_once $file;
+			$this -> $name = new $name();
+		}
+		else
+			{
+				$controller = new error('Undefined Library');
+				die();
+			}
 	}
 }
 ?>

@@ -8,7 +8,7 @@ class Controller
 	
 	public function view($name)
 	{
-		$file = 'views/' . $name . '.php';
+		$file = BASE . DS . 'views' . DS . $name . '.php';
 		if (file_exists($file))
 		{
 			require $file;
@@ -22,7 +22,7 @@ class Controller
 	
 	public function model($name)
 	{
-		$file = 'models/' . $name . '.php';
+		$file = BASE . DS . 'models' . DS . $name . '.php';
 		if (file_exists($file))
 		{
 			require $file;
@@ -38,7 +38,7 @@ class Controller
 	
 	public function lib($name)
 	{
-		$file = 'libs/' . $name . '.php';
+		$file = CORE . DS . $name . '.php';
 		if (file_exists($file))
 		{
 			require_once $file;

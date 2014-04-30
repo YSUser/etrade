@@ -3,6 +3,11 @@ class Request
 {
 	public function __construct()
 	{
+		$this -> init();
+	}
+	
+	private function init()
+	{
 		$uri = $_SERVER['REQUEST_URI'];
 		if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0)
 		{
@@ -11,6 +16,10 @@ class Request
 		elseif (strpos($uri, dirname($_SERVER['SCRIPT_NAME'])) === 0)
 		{
 			$uri = substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
+		}
+		elseif (strpos($uri, dirname(dirname($_SERVER['SCRIPT_NAME']))) === 0)
+		{
+			$uri = substr($uri, strlen(dirname(dirname($_SERVER['SCRIPT_NAME']))));
 		}
 		
 		$segments = ltrim($uri, '/');
@@ -21,7 +30,7 @@ class Request
 			$segments[0] = 'index';
 		}
 		
-		$file = 'controllers/' . $segments[0] . '.php';
+		$file = BASE . DS . 'controllers' . DS . $segments[0] . '.php';
 		if (file_exists($file))
 		{
 			require $file;
@@ -34,14 +43,14 @@ class Request
 			
 		$controller = new $segments[0];
 		
-		if (isset($segments[2]))
+		if (isset($segments[2]) && !empty($segments[2]))
 			{
 				$controller -> $segments[1]($segments[2]);
 			}
 			
 		else
 			{
-				if (isset($segments[1]))
+				if (isset($segments[1]) && !empty($segments[1]))
 					{
 						$controller -> $segments[1]();
 					}

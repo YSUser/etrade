@@ -8,7 +8,15 @@ class Controller
 	
 	public function view($name)
 	{
-		$file = BASE . DS . 'views' . DS . $name . '.php';
+		if (is_array($name))
+		{
+			$file = BASE . DS . 'views' . DS . $name['0'] . DS . $name['1'] . '.php';
+		}
+		else
+			{
+				$file = BASE . DS . 'views' . DS . $name . '.php';
+			}
+			
 		if (file_exists($file))
 		{
 			require $file;

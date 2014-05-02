@@ -25,7 +25,7 @@ class Request
 		$segments = ltrim($uri, '/');
 		$segments = explode('/', $segments);
 				
-		if (empty($segments[0]))
+		if (empty($segments[0]) || $segments[0] == 'index.php')
 		{
 			$segments[0] = 'index';
 		}

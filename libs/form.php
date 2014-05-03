@@ -3,7 +3,7 @@ class Form
 {
 	private $postData = array();
 	private $postRules = array();
-	private $postErrors = TRUE;
+	private $postErrors = FALSE;
 	private $postErrorMessages = array();
 	
 	public function setPostData($field)
@@ -33,10 +33,6 @@ class Form
 			}
 
 		}
-		else
-			{
-				$e = new error('Undefined Post Rule or Key');
-			}
 	}
 	
 	public function getPostData($field = NULL)
@@ -67,12 +63,15 @@ class Form
 					if ($this -> $rule($this ->postData[$name]) === FALSE)
 					{
 						$this -> postErrors = TRUE;
-						return FALSE;
 					}
 				}
 			}
 		}
-		return TRUE;
+		if ($this -> postErrors === FALSE && !empty($this -> postRules))
+		{
+			return TRUE;
+		}
+		return FALSE;
 	}
 	
 	public function getErrors()
@@ -109,6 +108,7 @@ class Form
 		}
 		else
 		{
+			array_push($this -> postErrorMessages, $arg . ' is not a valid email');
 			return FALSE;	
 		}
 	}
@@ -121,6 +121,7 @@ class Form
 		}
 		else
 		{
+			array_push($this -> postErrorMessages, $arg . ' is not a valid password');
 			return FALSE;	
 		}
 	}
@@ -133,6 +134,7 @@ class Form
 		}
 		else
 		{
+			array_push($this -> postErrorMessages, $arg . ' is not a alphanumeric');
 			return FALSE;
 		}
 		

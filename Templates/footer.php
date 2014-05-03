@@ -1,1 +1,0 @@
-<?php echo'</div></div><div id="footer"><p>E-trade All Rights Reserved &copy;</p></div></body></html>' ?>

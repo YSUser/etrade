@@ -1,11 +1,8 @@
 <?php
-//autoloader to come...
+require_once 'config.php';
 
-require 'request.php';
-require 'controller.php';
-require 'config.php';
-require 'error.php';
-require 'database.php';
-require 'model.php';
+spl_autoload_register(function ($class) {
+    require $class . '.php';
+});
 
 ?>

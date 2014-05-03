@@ -1,5 +1,5 @@
 <?php
 //Constants
-define('BASE_URL', '/newMVC/root/');
+define('BASE_URL', '/etrade/');
 
 ?>

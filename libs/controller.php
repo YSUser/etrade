@@ -6,7 +6,7 @@ class Controller
 		$this -> $key = $value;
 	}		
 	
-	public function view($name)
+	public function view($name, $data = NULL)
 	{
 		if (is_array($name))
 		{
@@ -19,6 +19,10 @@ class Controller
 			
 		if (file_exists($file))
 		{
+			if (is_array($data))
+			{
+				extract($data);
+			}
 			require $file;
 		}
 		else

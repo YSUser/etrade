@@ -45,7 +45,10 @@ class Request
 		
 		if (isset($segments[2]) && !empty($segments[2]))
 			{
-				$controller -> $segments[1]($segments[2]);
+				if (method_exists($controller, $segments[1]))
+				{
+					$controller -> $segments[1]($segments[2]);
+				}
 			}
 			
 		else

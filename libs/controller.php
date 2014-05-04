@@ -48,19 +48,26 @@ class Controller
 			}
 	}
 	
-	public function lib($name)
+	public function lib($name, $vars = array())
 	{
 		$file = CORE . DS . $name . '.php';
 		if (file_exists($file))
 		{
 			require_once $file;
-			$this -> $name = new $name();
+			if (!empty($vars))
+			{
+				$this -> $name = new $name($vars);
+			}
+			else
+			{
+				$this -> $name = new $name();
+			}
 		}
 		else
-			{
-				$controller = new error('Undefined Library');
-				die();
-			}
+		{
+			$controller = new error('Undefined Library');
+			die();
+		}
 	}
 }
 ?>

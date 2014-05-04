@@ -30,8 +30,10 @@ class PasswordHash {
 	var $portable_hashes;
 	var $random_state;
 
-	function PasswordHash($iteration_count_log2, $portable_hashes)
+	function PasswordHash($params)
 	{
+        $iteration_count_log2 = $params[0];
+        $portable_hashes = $params[1];
 		$this->itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
 		if ($iteration_count_log2 < 4 || $iteration_count_log2 > 31)

@@ -54,9 +54,14 @@ class Request
 		else
 			{
 				if (isset($segments[1]) && method_exists($controller, $segments[1]))
-					{
-						$controller -> $segments[1]();
-					}
+				{
+					$controller -> $segments[1]();
+				}
+				elseif (isset($segments[1]) && !method_exists($controller, $segments[1]) && !empty($segments[1]))
+				{
+					$controller = new error('Undefined method');
+					die();
+				}
 			}
 	}
 }

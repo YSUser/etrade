@@ -37,7 +37,7 @@ class Request
 		}
 		else
 			{
-				$controller = new error('Undefined Class');
+				$controller = new errorHandler('Undefined Class', 5);
 				die();
 			}
 			
@@ -59,7 +59,7 @@ class Request
 				}
 				elseif (isset($segments[1]) && !method_exists($controller, $segments[1]) && !empty($segments[1]))
 				{
-					$controller = new error('Undefined method');
+					$controller = new errorHandler('Undefined method');
 					die();
 				}
 			}

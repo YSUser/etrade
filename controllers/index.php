@@ -6,6 +6,5 @@ class Index extends Controller
 		$this -> view('content');
 	}	
 	
-	
 }
 ?>

@@ -37,7 +37,7 @@ class Request
 		}
 		else
 			{
-				$controller = new errorHandler('Undefined Class', 5);
+				$controller = new errorHandler('Undefined Class', 'E_ERROR');
 				die();
 			}
 			

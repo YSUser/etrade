@@ -1,25 +1,47 @@
 <?php
-class ErrorHandler extends Exception
+class ErrorHandler
 {
-	public function __construct($message, $code = 0, Exception $previous = null)
+	public function __construct($errorCode, $errorMessage, $errorFile = NULL, $errorLine = NULL)
 	{
-		parent::__construct($message, $code, $previous);
-		
-		$this -> checkSeverity($message, $code);
-		
+		$this -> error($errorMessage, $errorCode);
+		set_error_handler($this -> errorTemplate($errorCode, $errorMessage, $errorFile, $errorLine));
 	}
-	
-	private function checkSeverity($message, $severity)
+		
+	private function error($errorCode, $errorMessage)
 	{
-		if ($severity == 5)
+		switch ($errorCode)
 		{
-			exit($message);
+			case 1:
+			case 'E_ERROR':
+			case 'E_USER_ERROR':
+				trigger_error($this -> errorTemplate($errorCode, $errorMessage), E_USER_ERROR);
+				break;
+			
+			case 2:
+			case 'E_WARNING':
+			case 'E_USER_WARNING':
+				trigger_error($this -> errorTemplate($errorCode, $errorMessage), E_USER_WARNING);
+				break;
+				
+			case 3:
+			case 'E_NOTICE':
+			case 'E_USER_NOTICE':
+				trigger_error($this -> errorTemplate($errorCode, $errorMessage), E_USER_NOTICE);
+				break;
+			
+			default:
+				break;
 		}
 	}
 	
-	public function __toString()
+	private function errorTemplate($errorCode, $errorMessage, $errorFile = NULL, $errorLine = NULL)
 	{
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
-    }
+		$template = $errorCode . '<br>';
+		$template .= $errorMessage . '<br>';
+		$template .= $errorFile . '<br>';
+		$template .= $errorLine;
+
+		die();
+	}
 }
 ?>

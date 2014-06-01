@@ -28,12 +28,12 @@ class Database
 			}
 			catch (PDOException $e)
 			{
-				$this->errorHandler = $e;
+				$this->errorHandler = $e -> getMessage();
 				exit($e);	
 			}
-			catch (PDOException $e)
+			catch (Exception $e)
 			{
-				$this->errorHandler = $e;
+				$this->errorHandler = $e -> getMessage();
 				exit($e);	
 			}
         return $dbh;

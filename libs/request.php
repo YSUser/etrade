@@ -37,8 +37,7 @@ class Request
 		}
 		else
 			{
-				$controller = new errorHandler('Undefined Class', 'E_ERROR');
-				die();
+				errorHandler::error('Undefined Class', 'E_ERROR');
 			}
 			
 		$controller = new $segments[0];
@@ -59,8 +58,7 @@ class Request
 				}
 				elseif (isset($segments[1]) && !method_exists($controller, $segments[1]) && !empty($segments[1]))
 				{
-					$controller = new errorHandler('Undefined method');
-					die();
+					errorHandler::error('Undefined Class', 'E_WARNING');
 				}
 			}
 	}

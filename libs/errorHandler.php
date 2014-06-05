@@ -22,30 +22,42 @@ class errorHandler
 	
 	public static function error($errorMessage, $errorCode)
 	{
+		$backtrace = self::backtrace();
+		
 		switch ($errorCode)
 		{
 			case 1:
 			case 'E_ERROR':
 			case 'E_USER_ERROR':
-				trigger_error($errorMessage, E_USER_ERROR);
+				trigger_error($backtrace, E_USER_ERROR);
 				die();
 				break;
 			
 			case 2:
 			case 'E_WARNING':
 			case 'E_USER_WARNING':
-				trigger_error($errorMessage, E_USER_WARNING);
+				trigger_error($backtrace, E_USER_WARNING);
 				break;
 				
 			case 8:
 			case 'E_NOTICE':
 			case 'E_USER_NOTICE':
-				trigger_error($errorMessage, E_USER_NOTICE);
+				trigger_error($backtrace, E_USER_NOTICE);
 				break;
 			
 			default:
 				break;
 		}
+	}
+	
+	private static function backtrace()
+	{
+		$backtrace = debug_backtrace();
+		$backtraceMessage = $backtrace[1]['args'][0] . ',';
+		$backtraceMessage .= $backtrace[1]['args'][1] . ',';
+		$backtraceMessage .= $backtrace[1]['file'] . ',';
+		$backtraceMessage .= $backtrace[1]['line'];
+		return $backtraceMessage;
 	}
 	
 	public static function catchFatal()
@@ -74,17 +86,23 @@ class errorHandler
 			case 256:
 			case 512:
 			case 1024:
+				$backtrace = explode(',', $errorMessage);
 				$template .= '<h4>Framework triggered an error</h4>';
+				$template .= '<p>Error Code: ' . $backtrace[1] . '</p>';
+				$template .= '<p>Error Message: ' . $backtrace[0] . '</p>';
+				$template .= '<p>File Path: ' . $backtrace[2] . '</p>';
+				$template .= '<p>Line Number: ' . $backtrace[3] . '</p>';
 				break;
 			
 			default:
 				$template .= '<h4>PHP triggered an error</h4>';
+				$template .= '<p>Error Code: ' . $errorCode . '</p>';
+				$template .= '<p>Error Message: ' . $errorMessage . '</p>';
+				$template .= '<p>File Path: ' . $errorFile . '</p>';
+				$template .= '<p>Line Number: ' . $errorLine . '</p>';
 				break;
 		}
-		$template .= '<p>Error Code: ' . $errorCode . '</p>';
-		$template .= '<p>Error Message: ' . $errorMessage . '</p>';
-		$template .= '<p>File Path: ' . $errorFile . '</p>';
-		$template .= '<p>Line Number: ' . $errorLine . '</p>';
+
 		$template .= '</div>';
 		echo $template;
 	}

@@ -87,6 +87,7 @@ class errorHandler
 			case 512:
 			case 1024:
 				$backtrace = explode(',', $errorMessage);
+				
 				$template .= '<h4>Framework triggered an error</h4>';
 				$template .= '<p>Error Code: ' . $backtrace[1] . '</p>';
 				$template .= '<p>Error Message: ' . $backtrace[0] . '</p>';

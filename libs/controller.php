@@ -27,8 +27,7 @@ class Controller
 		}
 		else
 			{
-				$controller = new error('Undefined View');
-				die();
+				errorHandler::error('Undefined View', 'E_WARNING');
 			}
 	}
 	
@@ -43,8 +42,7 @@ class Controller
 		}
 		else
 			{
-				$controller = new error('Undefined Model');
-				die();
+				errorHandler::error('Undefined Model', 'E_WARNING');
 			}
 	}
 	
@@ -65,8 +63,7 @@ class Controller
 		}
 		else
 		{
-			$controller = new error('Undefined Library');
-			die();
+			errorHandler::error('Undefined Library', 'E_WARNING');
 		}
 	}
 }

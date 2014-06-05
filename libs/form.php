@@ -14,7 +14,7 @@ class Form
 		}
 		else
 			{
-				$e = new error('Undefined Post Key');
+				errorHandler::error('Undefined Post Key', 'E_NOTICE');
 			}
 	}
 	
@@ -47,7 +47,7 @@ class Form
 			}
 		else
 			{
-				$e = new error('Undefined Post Key');
+				errorHandler::error('Undefined Post Key', 'E_NOTICE');
 			}
 	}
 	

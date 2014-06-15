@@ -2,8 +2,8 @@
 class Encryption
 {
 	private $key = 'keystring';
-	private $cipher = 'MCRYPT_RIJNDAEL_128';
-	private $mode = 'MCRYPT_MODE_CBC';
+	private $cipher = MCRYPT_RIJNDAEL_128;
+	private $mode = MCRYPT_MODE_CBC;
 	
 	public function encrypt($text)
 	{

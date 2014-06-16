@@ -1,12 +1,36 @@
 <?php
-class Session
+class Session extends SessionHandler
 {
+	private $encryption = TRUE;
+	
 	public function __construct()
 	{
+		$this -> start();
+	}
+	
+	private function start()
+	{
+		if ($this -> encryption)
+		{
+			$this -> encryption = new Encryption;
+			session_set_save_handler($this, TRUE);
+		}
 		session_start();
 	}
 	
-	public function destroy()
+	public function read($id)
+	{
+        $data = parent::read($id);
+        return $this -> encryption -> decrypt($data);
+	}
+	
+	public function write($id, $data)
+	{
+        $data = $this -> encryption -> encrypt($data);
+        return parent::write($id, $data);
+	}
+	
+	public function _destroy()
 	{
 		session_destroy();
 	}
